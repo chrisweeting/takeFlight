@@ -38,7 +38,7 @@ const drawHorizon = () => {
   ctx.beginPath();
   ctx.rect(-1000, y, 2000, 1500);
 
-  ctx.fillStyle = "orange";
+  ctx.fillStyle = "#e8e2a4";
   ctx.fill();
   ctx.closePath();
 }
@@ -49,30 +49,58 @@ const drawRotation = () => {
   ctx.fillText("Rotation: " + rotation, 1, 1);
 }
 
+const rotateCam = (num) => {
+  if (num < 100 && num > 0) {
+    return ctx.rotate((Math.PI / 180) * 0.05);
+  } else if (num > -100 && num < 0) {
+    return ctx.rotate((Math.PI / 180) * -0.05);
+  }
+}
+
+const drawBird = () => {
+  ctx.save();
+
+  ctx.translate(0, 70);
+  ctx.rotate((Math.PI / 180) * -(rotation / 10));
+  ctx.beginPath();
+  ctx.rect(-30, -10, 60, 20);
+  ctx.fillStyle = "blue";
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.restore();
+}
+
 const animate = () => {
   ctx.clearRect(-1000, -1000, 2000, 2000);
-  drawHorizon()
-  drawRotation()
+  drawHorizon();
+  drawRotation();
+  drawBird();
 
-  ctx.rotate((Math.PI / 180) * rotation);
-
-  if (rightPressed) {
-    if (rotation < 0.02) {
-      rotation += 0.02;
-    } else {
-      rotation -= 0.2;
+  // ctx.rotate((Math.PI / 180) * rotation);
+  if (leftPressed) {
+    if (rotation < 100 && rotation >= 0) {
+      rotation += 1;
+      rotateCam(rotation);
+    } else if (rotation < 0) {
+      rotation += 1;
+      ctx.rotate((Math.PI / 180) * 0.05);
     }
-  } else if (leftPressed) {
-    if (rotation > -0.02) {
-      rotation -= 0.02;
-    } else {
-      rotation += 0.2;
+  } else if (rightPressed) {
+    if (rotation > -100 && rotation <= 0) {
+      rotation -= 1;
+      rotateCam(rotation);
+    } else if (rotation > 0) {
+      rotation -= 1;
+      ctx.rotate((Math.PI / 180) * -0.05);
     }
   } else {
-    if (rotation > rotationInit) {
-      rotation -= 0.02;
-    } else if (rotation < rotationInit) {
-      rotation += 0.02;
+    if (rotation > 0) {
+      rotation -= 1;
+      ctx.rotate((Math.PI / 180) * -0.05);
+    } else if (rotation < 0) {
+      rotation += 1;
+      ctx.rotate((Math.PI / 180) * 0.05);
     }
   }
 }
