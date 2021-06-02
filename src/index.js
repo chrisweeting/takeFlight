@@ -11,9 +11,9 @@ var rotation = 0;
 var counter = 0;
 var cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
 var cacti = [
-  { x: -100, y: -100, width: 20, height: 100, color: "#076d07", hInitial: 0, yOrd: 0 },
-  { x: -40, y: -30, width: 20, height: 30, color: "#076d07", hInitial: 0, yOrd: 0 },
-  { x: 30, y: -40, width: 30, height: 40, color: "#2e7a2f", hInitial: 0, yOrd: 0 }
+  // { x: -100, y: -100, width: 20, height: 100, color: "#076d07", hInitial: 0, yOrd: 0 },
+  // { x: -40, y: -30, width: 20, height: 30, color: "#076d07", hInitial: 0, yOrd: 0 },
+  // { x: 30, y: -40, width: 30, height: 40, color: "#2e7a2f", hInitial: 0, yOrd: 0 }
 ];
 var cloud1 = { sec1: 100, sec2: 130, sec3: 80 };
 var cloud2 = { sec1: -130, sec2: -100, sec3: -80 };
@@ -71,11 +71,17 @@ const drawBird = () => {
   
   ctx.translate(0, 150);
   ctx.rotate((Math.PI / 180) * -((rotation * 0.5 ) / 4));
+
+  // ctx.shadowBlur = 50;
+  // ctx.shadowColor = 'black';
+  // ctx.shadowOffsetY = 80;
+
   ctx.beginPath();
   ctx.rect(-60, -10, 120, 20);
   ctx.fillStyle = "blue";
   ctx.fill();
   ctx.closePath();
+  
   
   ctx.restore();
 };
@@ -208,6 +214,12 @@ const animate = () => {
       } else if (cactus.x < -20) {
         cactus.x -= 0.05;
       }
+    }
+
+    let cactusHit = cactus.y + ( h / 6 );
+
+    if ((cactusHit > -10 && cactusHit < 10) && (cactus.x > -60 && cactus.x < 60)) {
+      cactus.color = "purple";
     }
 
     drawCactus(cactus.x, cactus.yOrd, cactus.width, h, cactus.color);
