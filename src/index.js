@@ -18,7 +18,7 @@ var cacti = [
 var cloud1 = { sec1: 100, sec2: 130, sec3: 80 };
 var cloud2 = { sec1: -130, sec2: -100, sec3: -80 };
 
-ctx.translate(240, 200);
+ctx.translate(640, 360);
 
 
 
@@ -69,10 +69,10 @@ const rotateCam = (num) => {
 const drawBird = () => {
   ctx.save();
   
-  ctx.translate(0, 50);
+  ctx.translate(0, 150);
   ctx.rotate((Math.PI / 180) * -(rotation / 20));
   ctx.beginPath();
-  ctx.rect(-30, -10, 60, 20);
+  ctx.rect(-60, -10, 120, 20);
   ctx.fillStyle = "blue";
   ctx.fill();
   ctx.closePath();
