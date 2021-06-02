@@ -11,9 +11,9 @@ var rotation = 0;
 var counter = 0;
 var cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
 var cacti = [
-  { x: -100, y: -100, width: 20, height: 100, color: "#076d07" },
-  { x: -40, y: -30, width: 20, height: 30, color: "#076d07" },
-  { x: 30, y: -40, width: 30, height: 40, color: "#2e7a2f" }
+  { x: -100, y: -100, width: 20, height: 100, color: "#076d07", hInitial: 0, yOrd: 0 },
+  { x: -40, y: -30, width: 20, height: 30, color: "#076d07", hInitial: 0, yOrd: 0 },
+  { x: 30, y: -40, width: 30, height: 40, color: "#2e7a2f", hInitial: 0, yOrd: 0 }
 ];
 var cloud1 = { sec1: 100, sec2: 130, sec3: 80 };
 var cloud2 = { sec1: -130, sec2: -100, sec3: -80 };
@@ -103,7 +103,9 @@ const spawnCacti = () => {
     y: -100,
     width: 20,
     height: 100,
-    color: color
+    color: color,
+    hInitial: 0,
+    yOrd: 0
   });
 };
 
@@ -144,9 +146,17 @@ const animate = () => {
   }
   cacti.forEach(cactus => {
     cactus.x += turnX;
-    cactus.y += 0.3;
-    cactus.width *= 1.0019;
-    cactus.height *= 1.0014;
+    let h = cactus.height;
+    if (cactus.hInitial < cactus.height) {
+      cactus.hInitial += 1;
+      h = cactus.hInitial;
+      cactus.yOrd -= 1;
+    } else {
+      cactus.yOrd += 0.39;
+      cactus.width *= 1.0019;
+      cactus.height *= 1.0014;
+      cactus.hInitial = cactus.height;
+    }
     if (cactus.x > 50) {
       cactus.x += 0.15;
     } else if (cactus.x < -50) {
@@ -160,7 +170,7 @@ const animate = () => {
     } else if (cactus.x < -80) {
       cactus.x -= 0.3;
     }
-    drawCactus(cactus.x, cactus.y, cactus.width, cactus.height, cactus.color);
+    drawCactus(cactus.x, cactus.yOrd, cactus.width, h, cactus.color);
   });
   // turnX = 0;
 
