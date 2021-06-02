@@ -8,11 +8,13 @@ var turnX = 0;
 var y = 0;
 var rotationInit = 0;
 var rotation = 0;
-var cacti = {
-  0: { x: -80, y: -60, width: 20, height: 60 },
-  1: { x: -30, y: -60, width: 20, height: 60 },
-  2: { x: 30, y: -60, width: 20, height: 60 },
-};
+var counter = 0;
+var cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
+var cacti = [
+  { x: -100, y: -40, width: 10, height: 40, color: "#076d07" },
+  { x: -40, y: -30, width: 10, height: 30, color: "#076d07" },
+  { x: 30, y: -40, width: 20, height: 40, color: "#2e7a2f" }
+];
 
 ctx.translate(240, 200);
 
@@ -76,7 +78,7 @@ const drawBird = () => {
   ctx.restore();
 };
 
-const drawCactus = (x, y, w, h) => {
+const drawCactus = (x, y, w, h, color) => {
   // const place = -30 + x;
   // const width = 20 + w;
   // const height = 60 + h;
@@ -84,9 +86,21 @@ const drawCactus = (x, y, w, h) => {
   // const growingY =
   ctx.beginPath();
   ctx.rect(x, y, w, h);
-  ctx.fillStyle = "#a1d6a2";
+  ctx.fillStyle = color;
   ctx.fill();
   ctx.closePath();
+};
+
+const spawnCacti = () => {
+  let x = Math.ceil(Math.random() * 250) * (Math.round(Math.random()) ? 1 : -1);
+  let color = cactiColors[Math.floor(Math.random() * cactiColors.length)];
+  cacti.push({
+    x: x,
+    y: -30,
+    width: 10,
+    height: 30,
+    color: color
+  });
 };
 
 const animate = () => {
@@ -94,16 +108,32 @@ const animate = () => {
   drawHorizon();
   drawRotation();
   drawBird();
+  if (counter === 70) {
+    spawnCacti();
+    counter = 0;
+  }
   for (const i in cacti) {
     let cactus = cacti[i];
     cactus.x += turnX;
-    drawCactus(cactus.x, cactus.y, cactus.width, cactus.height);
+    cactus.y += 0.15;
+    cactus.width *= 1.0012;
+    cactus.height *= 1.0014;
+    if (cactus.x > 50) {
+      cactus.x += 0.02;
+    } else if (cactus.x < -50) {
+      cactus.x -= 0.02;
+    } else if (cactus.x > 30) {
+      cactus.x += 0.01;
+    } else if (cactus.x < -30) {
+      cactus.x -= 0.01;
+    } 
+    drawCactus(cactus.x, cactus.y, cactus.width, cactus.height, cactus.color);
   }
   // turnX = 0;
 
   // ctx.rotate((Math.PI / 180) * rotation);
   if (leftPressed) {
-    turnX += 0.01;
+    turnX += 0.025;
     if (rotation < 100 && rotation >= 0) {
       rotation += 1;
       rotateCam(rotation);
@@ -112,7 +142,7 @@ const animate = () => {
       ctx.rotate((Math.PI / 180) * 0.05);
     }
   } else if (rightPressed) {
-    turnX -= 0.01;
+    turnX -= 0.025;
     if (rotation > -100 && rotation <= 0) {
       rotation -= 1;
       rotateCam(rotation);
@@ -131,6 +161,7 @@ const animate = () => {
       turnX = 0;
     }
   }
+  counter += 1;
 };
 
 
