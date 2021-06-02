@@ -70,7 +70,7 @@ const drawBird = () => {
   ctx.save();
   
   ctx.translate(0, 150);
-  ctx.rotate((Math.PI / 180) * -(rotation / 20));
+  ctx.rotate((Math.PI / 180) * -((rotation * 0.5 ) / 4));
   ctx.beginPath();
   ctx.rect(-60, -10, 120, 20);
   ctx.fillStyle = "blue";
@@ -96,7 +96,7 @@ const drawCactus = (x, y, w, h, color) => {
 };
 
 const spawnCacti = () => {
-  let x = Math.ceil(Math.random() * 250) * (Math.round(Math.random()) ? 1 : -1);
+  let x = Math.ceil(Math.random() * 640) * (Math.round(Math.random()) ? 1 : -1);
   let color = cactiColors[Math.floor(Math.random() * cactiColors.length)];
   cacti.unshift({
     x: x,
@@ -134,16 +134,25 @@ const moveClouds = (num) => {
   }
 };
 
+const filterCacti = () => {
+  cacti = cacti.filter(cactus => (cactus.width < 65));
+};
+
 const animate = () => {
   ctx.clearRect(-1000, -1000, 2000, 2000);
+  filterCacti();
   drawHorizon();
   drawClouds();
   drawRotation();
   drawBird();
-  if (counter === 70) {
+
+  //cactus spawn frequency
+  if (counter === 20) {
     spawnCacti();
     counter = 0;
   }
+
+
   cacti.forEach(cactus => {
     cactus.x += turnX;
     let h = cactus.height;
@@ -153,35 +162,64 @@ const animate = () => {
       cactus.yOrd -= 1;
     } else {
       cactus.yOrd += 0.39;
-      cactus.width *= 1.0019;
-      cactus.height *= 1.0014;
+      cactus.y += 0.39;
+      cactus.width += cactus.width * 0.0014;
+      cactus.height += cactus.height * 0.0014;
+      // cactus.height *= 1.0014;
       cactus.hInitial = cactus.height;
     }
-    if (cactus.x > 50) {
-      cactus.x += 0.15;
-    } else if (cactus.x < -50) {
-      cactus.x -= 0.15;
-    } else if (cactus.x > 30) {
-      cactus.x += 0.06;
-    } else if (cactus.x < -30) {
-      cactus.x -= 0.06;
-    } else if (cactus.x > 80) {
-      cactus.x += 0.3;
-    } else if (cactus.x < -80) {
-      cactus.x -= 0.3;
+
+    //cactus removal animation and yOrd speed control
+    if (cactus.width > 50) {
+      cactus.yOrd += 1;
+      cactus.height -= 1;
+    } else if (cactus.width > 27) {
+      cactus.yOrd += 1;
+      // cactus.color = "black";
+    } else if (cactus.width > 23) {
+      cactus.yOrd += 0.5;
+      // cactus.color = "red";
     }
+
+    if (cactus.y > 0) {
+      cactus.color = "red";
+    }
+
+    // cactus path change to account for perspective
+    if (cactus.y > -90) {
+      if (cactus.x > 100) {
+        cactus.x += 0.55;
+      } else if (cactus.x < -100) {
+        cactus.x -= 0.55;
+      } else if (cactus.x > 60) {
+        cactus.x += 0.2;
+      } else if (cactus.x < -60) {
+        cactus.x -= 0.2;
+      } else if (cactus.x > 80) {
+        cactus.x += 0.4;
+      } else if (cactus.x < -80) {
+        cactus.x -= 0.4;
+      } else if (cactus.x > 40) {
+        cactus.x += 0.1;
+      } else if (cactus.x < -40) {
+        cactus.x -= 0.1;
+      } else if (cactus.x > 20) {
+        cactus.x += 0.05;
+      } else if (cactus.x < -20) {
+        cactus.x -= 0.05;
+      }
+    }
+
     drawCactus(cactus.x, cactus.yOrd, cactus.width, h, cactus.color);
   });
-  // turnX = 0;
-
-  // ctx.rotate((Math.PI / 180) * rotation);
+  
   if (leftPressed) {
     if (turnX <= 0)  {
       turnX += 0.075;
     } else if (turnX > 0 && turnX < 1.7) {
       turnX += 0.035;
     }
-    moveClouds(0.21);
+    moveClouds(0.61); //change value to shift cloud x position  
     if (rotation < 100 && rotation >= 0) {
       rotation += 1;
       rotateCam(rotation);
@@ -195,7 +233,7 @@ const animate = () => {
     } else if (turnX < 0 && turnX > -1.7) {
       turnX -= 0.35;
     }
-    moveClouds(-0.21);
+    moveClouds(-0.61); //change value to shift cloud x position 
     if (rotation > -100 && rotation <= 0) {
       rotation -= 1;
       rotateCam(rotation);
