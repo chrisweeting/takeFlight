@@ -1,7 +1,7 @@
-* {
+/* * {
   padding: 0;
   margin: 50px;
-}
+} */
 
 canvas {
   background: #52c3e5;
@@ -9,6 +9,35 @@ canvas {
   margin: 5vh auto;
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 50px auto;
 }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly90YWtlX2ZsaWdodC8uL3NyYy9zdHlsZXMvaW5kZXguY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZDs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixjQUFjO0VBQ2QsZ0JBQWdCO0VBQ2hCLFdBQVc7RUFDWCxZQUFZO0FBQ2QsQyIsImZpbGUiOiJtYWluLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIioge1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDUwcHg7XG59XG5cbmNhbnZhcyB7XG4gIGJhY2tncm91bmQ6ICM1MmMzZTU7XG4gIGRpc3BsYXk6IGJsb2NrO1xuICBtYXJnaW46IDV2aCBhdXRvO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xufSJdLCJzb3VyY2VSb290IjoiIn0=*/
+.title-card {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.144);
+  top: 0;
+  left: 0;
+  display: flex;
+  
+}
+
+.logo {
+  /* background-image: url("../src/assets/Take Flight-01.png"); */
+  width: 50vw;
+  height: 20vh;
+}
+
+.begin {
+  width: 15vw;
+  height: 2vh;
+  margin: 30vh auto;
+}
+
+.hidden {
+  display: none;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly90YWtlX2ZsaWdodC8uL3NyYy9zdHlsZXMvaW5kZXguY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7R0FHRzs7QUFFSDtFQUNFLG1CQUFtQjtFQUNuQixjQUFjO0VBQ2QsZ0JBQWdCO0VBQ2hCLFdBQVc7RUFDWCxZQUFZO0VBQ1osVUFBVTtFQUNWLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGVBQWU7RUFDZixhQUFhO0VBQ2IsWUFBWTtFQUNaLHNDQUFzQztFQUN0QyxNQUFNO0VBQ04sT0FBTztFQUNQLGFBQWE7O0FBRWY7O0FBRUE7RUFDRSwrREFBK0Q7RUFDL0QsV0FBVztFQUNYLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFdBQVc7RUFDWCxXQUFXO0VBQ1gsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsYUFBYTtBQUNmLEMiLCJmaWxlIjoibWFpbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiAqIHtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiA1MHB4O1xufSAqL1xuXG5jYW52YXMge1xuICBiYWNrZ3JvdW5kOiAjNTJjM2U1O1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luOiA1dmggYXV0bztcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogMTAwJTtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiA1MHB4IGF1dG87XG59XG5cbi50aXRsZS1jYXJkIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBoZWlnaHQ6IDEwMHZoO1xuICB3aWR0aDogMTAwdnc7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC4xNDQpO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIFxufVxuXG4ubG9nbyB7XG4gIC8qIGJhY2tncm91bmQtaW1hZ2U6IHVybChcIi4uL3NyYy9hc3NldHMvVGFrZSBGbGlnaHQtMDEucG5nXCIpOyAqL1xuICB3aWR0aDogNTB2dztcbiAgaGVpZ2h0OiAyMHZoO1xufVxuXG4uYmVnaW4ge1xuICB3aWR0aDogMTV2dztcbiAgaGVpZ2h0OiAydmg7XG4gIG1hcmdpbjogMzB2aCBhdXRvO1xufVxuXG4uaGlkZGVuIHtcbiAgZGlzcGxheTogbm9uZTtcbn0iXSwic291cmNlUm9vdCI6IiJ9*/

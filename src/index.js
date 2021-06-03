@@ -1,50 +1,52 @@
 import './styles/index.css';
 
-var canvas = document.getElementById("flyCanvas");
-var ctx = canvas.getContext("2d");
-var rightPressed = false;
-var leftPressed = false;
-var spacePressed = false;
-var turnX = 0;
-var y = 0;
-var rotationInit = 0;
-var rotation = 0;
-var counter = 0;
-var cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
-var cacti = [];
+const titleCard = document.querySelector(".title-card");
+const canvas = document.getElementById("flyCanvas");
+const ctx = canvas.getContext("2d");
+let rightPressed = false;
+let leftPressed = false;
+let spacePressed = false;
+let turnX = 0;
+let y = 0;
+let score = 0;
+let hiScore = 0;
+let rotation = 0;
+let counter = 0;
+let cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
+let cacti = [];
 
 
-var birdImg = new Image();
+const birdImg = new Image();
 birdImg.src = "src/assets/Take Flight-05.png";
 
-var cactus1 = new Image();
+const cactus1 = new Image();
 cactus1.src = "src/assets/Take Flight-06.png";
 
-var cactus2 = new Image();
+const cactus2 = new Image();
 cactus2.src = "src/assets/Take Flight-07.png";
 
-var cactus3 = new Image();
+const cactus3 = new Image();
 cactus3.src = "src/assets/Take Flight-08.png";
 
-var cactus4 = new Image();
+const cactus4 = new Image();
 cactus4.src = "src/assets/Take Flight-09.png";
 
-var cactus5 = new Image();
+const cactus5 = new Image();
 cactus5.src = "src/assets/Take Flight-10.png";
 
-var cactus6 = new Image();
+const cactus6 = new Image();
 cactus6.src = "src/assets/Take Flight-11.png";
 
-var cactus7 = new Image();
+const cactus7 = new Image();
 cactus7.src = "src/assets/Take Flight-12.png";
 
-var cactus8 = new Image();
+const cactus8 = new Image();
 cactus8.src = "src/assets/Take Flight-13.png";
 
-var cloud1 = new Image();
+const cloud1 = new Image();
 cloud1.src = "src/assets/Take Flight-03.png";
 
-var cloud2 = new Image();
+const cloud2 = new Image();
 cloud2.src = "src/assets/Take Flight-04.png";
 
 const cactusBin = [
@@ -76,7 +78,7 @@ const keyDownHandler = (e) => {
   }
   else if (e.key == "Left" || e.key == "ArrowLeft") {
     leftPressed = true;
-  } else if (e.key == "space") {
+  } else if (e.key === ' ' || e.key === 'Spacebar') {
     spacePressed = true;
   }
 };
@@ -87,8 +89,11 @@ const keyUpHandler = (e) => {
   }
   else if (e.key == "Left" || e.key == "ArrowLeft") {
     leftPressed = false;
-  } else if (e.key == "space") {
+  } else if (e.key === ' ' || e.key === 'Spacebar') {
     // restart();
+    animate();
+    animate();
+    titleCard.classList.add("hidden");
     spacePressed = false;
   }
 };
@@ -105,10 +110,31 @@ const drawHorizon = () => {
   ctx.closePath();
 };
 
-const drawRotation = () => {
-  ctx.font = "16px Arial";
-  ctx.fillStyle = "#0095DD";
-  ctx.fillText("Rotation: " + rotation, 1, 1);
+// const drawRotation = () => {
+//   ctx.font = "16px Arial";
+//   ctx.fillStyle = "#0095DD";
+//   ctx.fillText("Rotation: " + rotation, 1, 1);
+// };
+
+const drawScore = () => {
+  if (score > 4000) {
+    ctx.font = "18px Helvetica";
+    ctx.fillStyle = "#0095DD";
+  } else {
+    ctx.font = "16px Helvetica";
+    ctx.fillStyle = "#0095DD";
+  }
+  ctx.fillText("Score: " + score, 3, -3);
+
+};
+
+const drawHiScore = () => {
+  if (score > hiScore) hiScore = score;
+  ctx.font = "16px Helvetica";
+  ctx.fillStyle = "red";
+  
+  ctx.fillText("High Score: " + hiScore, 3, -20);
+
 };
 
 const rotateCam = (num) => {
@@ -210,7 +236,9 @@ const animate = () => {
   filterCacti();
   drawHorizon();
   drawClouds();
-  drawRotation();
+  // drawRotation();
+  drawScore();
+  drawHiScore();
   drawBird();
 
   //cactus spawn frequency
@@ -278,13 +306,14 @@ const animate = () => {
     }
 
     // let cactusHit = cactus.y - ( h/5 );
-    let leftHit = cactus.x + (cactus.width);
+    let cactusHit = cactus.y;
+    let leftHit = cactus.x + (cactus.width / 2);
 
-    // if ((cactusHit < 20 && cactusHit > -10) && (cactus.x > -170 && cactus.x < 125)) {
-    if ((cactus.y < 3 && cactus.y > 0) && ((cactus.x > -125 && cactus.x < 125) || (leftHit > -125 && leftHit < 125))) {
-      cactus.color = "purple";
+    // if ((cactusHit < 10 && cactusHit > 5) && (cactus.x > -225 && cactus.x < 100)) {
+    if ((cactus.y < 10 && cactus.y > 5) && (leftHit > -125 && leftHit < 125)) {
+      // cactus.color = "purple";
       // clearInterval(interval);
-      // document.location.reload();
+      document.location.reload();
     }
 
     drawCactus(cactus.x, cactus.yOrd, cactus.width, h, cactus.color, cactus.img );
@@ -330,12 +359,13 @@ const animate = () => {
     }
   }
   counter += 1;
+  score += 1;
   requestAnimationFrame(animate);
 };
 
 
 // const interval = setInterval(animate, 10);
-animate();
+// animate();
 // if (spacePressed) {
 //   interval();
 // }
