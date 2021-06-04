@@ -110,7 +110,6 @@ const keyUpHandler = (e) => {
   else if (e.key == "Left" || e.key == "ArrowLeft") {
     leftPressed = false;
   } else if (e.key === ' ' || e.key === 'Spacebar') {
-    // restart();
     if (game) {
       if (paused) {
         paused = false;
@@ -219,11 +218,7 @@ const drawInstructions = () => {
 
 const drawCactus = (x, y, w, h, color, img) => {
   ctx.save();
-  // const place = -30 + x;
-  // const width = 20 + w;
-  // const height = 60 + h;
-  // const growingX = place + gX;
-  // const growingY =
+  
   ctx.drawImage(img, x, y, w, h);
   // ctx.beginPath();
   // ctx.rect(x, y, w, h);
