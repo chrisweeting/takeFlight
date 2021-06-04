@@ -1,3 +1,4 @@
+import './styles/reset.css';
 import './styles/index.css';
 
 const titleCard = document.querySelector(".title-card");
@@ -15,12 +16,17 @@ let counter = 0;
 let cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
 let cacti = [];
 
-
 const birdImg = new Image();
 birdImg.src = "src/assets/Take Flight-05.png";
 
 const controls = new Image();
 controls.src = "src/assets/keys.png";
+
+const controlL = new Image();
+controlL.src = "src/assets/key_left.png";
+
+const controlR = new Image();
+controlR.src = "src/assets/key_right.png";
 
 const cactus1 = new Image();
 cactus1.src = "src/assets/Take Flight-06.png";
@@ -52,6 +58,8 @@ cloud1.src = "src/assets/Take Flight-03.png";
 const cloud2 = new Image();
 cloud2.src = "src/assets/Take Flight-04.png";
 
+let instKey = controls;
+
 const cactusBin = [
   { img: cactus1, width: 180, height: 300 },
   { img: cactus2, width: 180, height: 300 },
@@ -63,7 +71,7 @@ const cactusBin = [
   { img: cactus8, width: 80, height: 280 },
 ];
 
-const cloudPositions = {
+var cloudPositions = {
   cloud1: 100,
   cloud2: -330,
   cloud3: -730,
@@ -177,6 +185,19 @@ const drawBird = () => {
   ctx.restore();
 };
 
+const drawInstructions = () => {
+  ctx.save();
+
+  ctx.translate(0, 50);
+  ctx.rotate((Math.PI / 180) * -((rotation * 1) / 25));
+
+  if (score > 150 && score < 700) {
+    ctx.drawImage(instKey, -100, 200, 200, 70);
+  }
+
+  ctx.restore();
+};
+
 const drawCactus = (x, y, w, h, color, img) => {
   ctx.save();
   // const place = -30 + x;
@@ -232,9 +253,14 @@ const drawClouds = () => {
 
 const moveClouds = (num) => {
   for (const cloud in cloudPositions) {
-    let pos = cloudPositions[cloud];
-    pos += num;
+    // let pos = cloudPositions[cloud];
+    // pos += num;
+    cloudPositions[cloud] += num;
   }
+  // cloudPositions.cloud1 += num;
+  // cloudPositions.cloud2 += num;
+  // cloudPositions.cloud3 += num;
+  // cloudPositions.cloud4 += num;
 };
 
 const filterCacti = () => {
@@ -246,9 +272,8 @@ const animate = () => {
   ctx.clearRect(-1000, -1000, 2000, 2000);
   filterCacti();
   drawHorizon();
-  if (hiScore < 600 && (score > 100 && score < 6500)) {
-    ctx.drawImage(controls, -100, 200, 200, 70);
-  }
+  // if (hiScore < 600 && (score > 100 && score < 6500)) {
+  drawInstructions();
   drawClouds();
   // drawRotation();
   drawScore();
@@ -334,6 +359,7 @@ const animate = () => {
   });
   
   if (leftPressed) {
+    instKey = controlL;
     if (turnX <= 0)  {
       turnX += 0.055;
     } else if (turnX > 0 && turnX < 1.7) {
@@ -348,6 +374,7 @@ const animate = () => {
       ctx.rotate((Math.PI / 180) * 0.05);
     }
   } else if (rightPressed) {
+    instKey = controlR;
     if (turnX >= 0) {
       turnX -= 0.055;
     } else if (turnX < 0 && turnX > -1.7) {
@@ -362,6 +389,7 @@ const animate = () => {
       ctx.rotate((Math.PI / 180) * -0.05);
     }
   } else {
+    instKey = controls;
     if (rotation > 0) {
       rotation -= 1;
       ctx.rotate((Math.PI / 180) * -0.05);
