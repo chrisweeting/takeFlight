@@ -2,6 +2,7 @@ import './styles/reset.css';
 import './styles/index.css';
 
 const titleCard = document.querySelector(".title-card");
+const pauseCard = document.querySelector(".pause-card");
 const canvas = document.getElementById("flyCanvas");
 const ctx = canvas.getContext("2d");
 let rightPressed = false;
@@ -15,6 +16,8 @@ let rotation = 0;
 let counter = 0;
 let cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
 let cacti = [];
+let game = false;
+let paused = false;
 
 const birdImg = new Image();
 birdImg.src = "src/assets/Take Flight-05.png";
@@ -81,6 +84,12 @@ var cloudPositions = {
 
 ctx.translate(640, 360);
 
+const startGame = () => {
+  animate();
+  animate();
+  titleCard.classList.add("hidden");
+  game = true;
+};
 
 
 const keyDownHandler = (e) => {
@@ -102,9 +111,19 @@ const keyUpHandler = (e) => {
     leftPressed = false;
   } else if (e.key === ' ' || e.key === 'Spacebar') {
     // restart();
-    animate();
-    animate();
-    titleCard.classList.add("hidden");
+    if (game) {
+      if (paused) {
+        paused = false;
+        pauseCard.classList.remove("show");
+        animate();
+        animate();
+      } else {
+        paused = true;
+        pauseCard.classList.add("show");
+      }
+    } else {
+      startGame();
+    }
     spacePressed = false;
   }
 };
@@ -232,35 +251,16 @@ const spawnCacti = () => {
 };
 
 const drawClouds = () => {
-  // ctx.beginPath();
-  // ctx.arc(cloud1.sec1, -200, 50, 0, 2 * Math.PI);
-  // ctx.arc(cloud1.sec2, -170, 40, 0, 2 * Math.PI);
-  // ctx.arc(cloud1.sec3, -150, 30, 0, 2 * Math.PI);
-  // ctx.fillStyle = "#add6d8";
-  // ctx.fill();
   ctx.drawImage(cloud1, cloudPositions.cloud1, -200, 300, 200);
   ctx.drawImage(cloud2, cloudPositions.cloud2, -300, 300, 150);
   ctx.drawImage(cloud1, cloudPositions.cloud3, -200, 300, 200);
   ctx.drawImage(cloud2, cloudPositions.cloud4, -300, 300, 150);
-
-  // ctx.beginPath();
-  // ctx.arc(cloud2.sec1, -70, 40, 0, 2 * Math.PI);
-  // ctx.arc(cloud2.sec2, -100, 40, 0, 2 * Math.PI);
-  // ctx.arc(cloud2.sec3, -80, 50, 0, 2 * Math.PI);
-  // ctx.fillStyle = "#add6d8";
-  // ctx.fill();
 };
 
 const moveClouds = (num) => {
   for (const cloud in cloudPositions) {
-    // let pos = cloudPositions[cloud];
-    // pos += num;
     cloudPositions[cloud] += num;
   }
-  // cloudPositions.cloud1 += num;
-  // cloudPositions.cloud2 += num;
-  // cloudPositions.cloud3 += num;
-  // cloudPositions.cloud4 += num;
 };
 
 const filterCacti = () => {
@@ -272,7 +272,6 @@ const animate = () => {
   ctx.clearRect(-1000, -1000, 2000, 2000);
   filterCacti();
   drawHorizon();
-  // if (hiScore < 600 && (score > 100 && score < 6500)) {
   drawInstructions();
   drawClouds();
   // drawRotation();
@@ -344,14 +343,13 @@ const animate = () => {
       }
     }
 
-    // let cactusHit = cactus.y - ( h/5 );
     let cactusHit = cactus.y;
     let leftHit = cactus.x + (cactus.width / 2);
 
-    // if ((cactusHit < 10 && cactusHit > 5) && (cactus.x > -225 && cactus.x < 100)) {
     if ((cactus.y < 10 && cactus.y > 5) && (leftHit > -125 && leftHit < 125)) {
       // cactus.color = "purple";
       // clearInterval(interval);
+      game = false;
       document.location.reload();
     }
 
@@ -402,22 +400,20 @@ const animate = () => {
   }
   counter += 1;
   score += 1;
-  requestAnimationFrame(animate);
+  if (!paused) requestAnimationFrame(animate);
 };
 
 
 // const interval = setInterval(animate, 10);
 // animate();
-// if (spacePressed) {
-//   interval();
-// }
 
-    //on keydown the horizon rotates to a certain point
-    //on keyup the horizon returns to its initial state
-    //as the horizon shifts enemy elements/obstacles shift too
-    //they also add or decrease their x position depending on the key direction
 
-    //variable for time elapsed === high score
-    //high score saved and displayed
+//on keydown the horizon rotates to a certain point
+//on keyup the horizon returns to its initial state
+//as the horizon shifts enemy elements/obstacles shift too
+//they also add or decrease their x position depending on the key direction
+
+//variable for time elapsed === high score
+//high score saved and displayed
 
 

@@ -23,6 +23,16 @@ canvas {
   justify-content: space-between;
 }
 
+.pause-card {
+  position: fixed;
+  width: 100vw;
+  height: 95vh;
+  background-color: rgba(0, 0, 0, 0.144);
+  top: 0;
+  left: 0;
+  display: none;
+}
+
 .logo {
   /* background-image: url("../src/assets/Take Flight-01.png"); */
   height: 20vh;
@@ -54,4 +64,16 @@ canvas {
 
 .hidden {
   display: none;
+}
+
+.show {
+  display: block;
+}
+
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
