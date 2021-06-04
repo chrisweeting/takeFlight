@@ -9,7 +9,7 @@ let spacePressed = false;
 let turnX = 0;
 let y = 0;
 let score = 0;
-let hiScore = 0;
+let hiScore = JSON.parse(localStorage.getItem("hiScore")) || 0;
 let rotation = 0;
 let counter = 0;
 let cactiColors = ["#076d07", "#2e7a2f", "#a1d6a2", "#5ef75e"];
@@ -18,6 +18,9 @@ let cacti = [];
 
 const birdImg = new Image();
 birdImg.src = "src/assets/Take Flight-05.png";
+
+const controls = new Image();
+controls.src = "src/assets/keys.png";
 
 const cactus1 = new Image();
 cactus1.src = "src/assets/Take Flight-06.png";
@@ -129,7 +132,15 @@ const drawScore = () => {
 };
 
 const drawHiScore = () => {
-  if (score > hiScore) hiScore = score;
+  if (typeof hiScore != "number") hiScore = hiScore.number;
+
+  if (score > hiScore) {
+    hiScore = score;
+    localStorage.setItem('hiScore', JSON.stringify({
+      number: Number(score)
+    }));
+  }
+
   ctx.font = "16px Helvetica";
   ctx.fillStyle = "red";
   
@@ -235,6 +246,9 @@ const animate = () => {
   ctx.clearRect(-1000, -1000, 2000, 2000);
   filterCacti();
   drawHorizon();
+  if (hiScore < 200 && (score > 100 && score < 700)) {
+    ctx.drawImage(controls, -100, 200, 200, 70);
+  }
   drawClouds();
   // drawRotation();
   drawScore();
