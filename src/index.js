@@ -246,7 +246,7 @@ const animate = () => {
   ctx.clearRect(-1000, -1000, 2000, 2000);
   filterCacti();
   drawHorizon();
-  if (hiScore < 200 && (score > 100 && score < 700)) {
+  if (hiScore < 600 && (score > 100 && score < 6500)) {
     ctx.drawImage(controls, -100, 200, 200, 70);
   }
   drawClouds();
