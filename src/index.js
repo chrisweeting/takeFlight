@@ -218,7 +218,6 @@ const drawInstructions = () => {
 
 const drawCactus = (x, y, w, h, color, img) => {
   ctx.save();
-  
   ctx.drawImage(img, x, y, w, h);
   // ctx.beginPath();
   // ctx.rect(x, y, w, h);
