@@ -103,7 +103,6 @@ canvas {
 .begin-again {
   height: 2vh;
   margin: 4vh auto;
-  cursor: pointer;
 }
 
 .game-over {
