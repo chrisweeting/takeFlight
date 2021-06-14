@@ -114,7 +114,7 @@ const startGame = () => {
 };
 
 
-const handleClick = () => {
+const handleReset = () => {
   document.location.reload();
 };
 
@@ -136,7 +136,8 @@ const endGame = () => {
   canvas.classList.add("hidden");
   gameOverCard.classList.remove("hidden");
   dummyCard.classList.remove("hidden");
-  beginAgain.addEventListener("click", handleClick);
+  // beginAgain.addEventListener("click", handleClick);
+  document.addEventListener("keyup", handleReset);
 };
 
 
