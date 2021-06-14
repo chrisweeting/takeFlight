@@ -12,7 +12,17 @@ canvas {
   padding: 0;
 }
 
-.title-card {
+.dummy-canvas {
+  background: #52c3e5;
+  display: block;
+  margin: 5vh auto;
+  width: 100vw;
+  height: 90vh;
+  padding: 0;
+  position: absolute;
+}
+
+.title-card, .game-over-card, .instruction-card {
   position: fixed;
   width: 100vw;
   height: 95vh;
@@ -22,6 +32,7 @@ canvas {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 1;
 }
 
 .pause-card {
@@ -39,6 +50,26 @@ canvas {
   height: 20vh;
 }
 
+.controls {
+  height: 1.5vh;
+  margin-bottom: 10vh;
+  cursor: pointer;
+}
+
+.inst_1 {
+  height: 1.5vh;
+}
+
+.inst_2 {
+  height: 1.1vh;
+  margin-top: 1vh;
+}
+
+.directions {
+  height: fit-content;
+  margin-bottom: 20vh;
+}
+
 .char {
   width: 60%;
 }
@@ -54,13 +85,42 @@ canvas {
   align-items: center;
 }
 
+.right-a a {
+  margin-bottom: 10vh;
+}
+
 .github {
   width: 30px;
 }
 
 .begin {
   height: 2vh;
-  margin: 30vh auto;
+  /* margin: 30vh auto; */
+  margin: 10vh auto;
+  margin-top: 28vh;
+}
+
+.begin-again {
+  height: 2vh;
+  margin: 4vh auto;
+  cursor: pointer;
+}
+
+.game-over {
+  height: 2vh;
+  margin: 15vh auto;
+  cursor: pointer;
+}
+
+.new-high-score {
+  height: 3vh;
+  margin: 3vh auto;
+  display: none;
+}
+
+.high-score {
+  font-family: 'DotGothic16', sans-serif;
+  list-style: none;
 }
 
 .hidden {

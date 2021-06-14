@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./dist/main.css" />
   <link rel="shortcut icon" href="src/assets/ft_fav.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
   <meta property="og:title" content="Take Flight" />
   <meta property='og:image' content="src/assets/tf_img.png" />
@@ -17,6 +19,7 @@
 </head>
 
 <body>
+  <div class="dummy-canvas"></div>
   <div class="title-card">
     <div class="left">
       <img src="src/assets/Take Flight-01.png" alt="" class="logo">
@@ -25,12 +28,46 @@
       <img src="src/assets/main.png" alt="" class="char">
       <div class="right-a">
         <img src="src/assets/begin.gif" alt="" class="begin">
+        <img src="src/assets/controls.png" alt="" class="controls">
         <a href="https://github.com/chrisweeting/takeFlight" >
           <img src="src/assets/github_logo.png" alt="" class="github">
         </a>
       </div>
     </div>
   </div>
+
+  <div class="instruction-card">
+    <div class="left">
+      <img src="src/assets/Take Flight-01.png" alt="" class="logo">
+    </div>
+    <div class="right">
+      <img src="src/assets/directions.gif" alt="" class="directions">
+      <div class="right-a">
+        <img src="src/assets/inst_1.png" alt="" class="inst_1">
+        <img src="src/assets/inst_2.png" alt="" class="inst_2">
+        <img src="src/assets/begin.gif" alt="" class="begin">
+      </div>
+    </div>
+  </div>
+
+  <div class="game-over-card">
+    <div class="left">
+      <img src="src/assets/Take Flight-01.png" alt="" class="logo">
+    </div>
+    <div class="right">
+      <!-- <img src="src/assets/main.png" alt="" class="char"> -->
+      <div class="right-a">
+        <img src="src/assets/game_over.png" alt="" class="game-over">
+        <img src="src/assets/high_score.gif" alt="" class="new-high-score">
+        <li class="high-score"></li>
+        <img src="src/assets/begin_again.png" alt="" class="begin-again">
+        <a href="https://github.com/chrisweeting/takeFlight" >
+          <img src="src/assets/github_logo.png" alt="" class="github">
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="pause-card">
     <img src="src/assets/Take Flight-01.png" alt="" class="logo">
   </div>

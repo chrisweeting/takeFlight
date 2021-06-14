@@ -3,7 +3,15 @@ import './styles/index.css';
 
 const titleCard = document.querySelector(".title-card");
 const pauseCard = document.querySelector(".pause-card");
+const gameOverCard = document.querySelector(".game-over-card");
+const instructionCard = document.querySelector(".instruction-card");
+const dummyCard = document.querySelector(".dummy-canvas");
 const canvas = document.getElementById("flyCanvas");
+const begin = document.querySelector(".begin");
+const beginAgain = document.querySelector(".begin-again");
+const printHighScore = document.querySelector(".high-score");
+const newHighScore = document.querySelector(".new-high-score");
+const cntrl = document.querySelector(".controls");
 const ctx = canvas.getContext("2d");
 let rightPressed = false;
 let leftPressed = false;
@@ -83,12 +91,52 @@ var cloudPositions = {
 
 
 ctx.translate(640, 360);
-
+canvas.classList.add("hidden");
+gameOverCard.classList.add("hidden");
+instructionCard.classList.add("hidden");
+// const startGame = () => {
+  //   animate();
+  //   animate();
+  //   titleCard.classList.add("hidden");
+  //   game = true;
+  // };
+  
 const startGame = () => {
+  // document.addEventListener("keydown", keyDownHandler, false);
+  // document.addEventListener("keyup", keyUpHandler, false);
   animate();
   animate();
+  canvas.classList.remove("hidden");
   titleCard.classList.add("hidden");
+  dummyCard.classList.add("hidden");
+  instructionCard.classList.add("hidden");
   game = true;
+};
+
+
+const handleClick = () => {
+  document.location.reload();
+};
+
+const openControls = () => {
+  titleCard.classList.add("hidden");
+  instructionCard.classList.remove("hidden");
+};
+
+// begin.addEventListener("click", startGame);
+cntrl.addEventListener("click", openControls);
+
+const endGame = () => {
+  if (hiScore === score) {
+    newHighScore.classList.add("show");
+  }
+  printHighScore.innerHTML = `Score: ${score}`;
+  document.removeEventListener("keydown", keyDownHandler, false);
+  document.removeEventListener("keyup", keyUpHandler, false);
+  canvas.classList.add("hidden");
+  gameOverCard.classList.remove("hidden");
+  dummyCard.classList.remove("hidden");
+  beginAgain.addEventListener("click", handleClick);
 };
 
 
@@ -344,7 +392,9 @@ const animate = () => {
       // cactus.color = "purple";
       // clearInterval(interval);
       game = false;
-      document.location.reload();
+      paused = true;
+      endGame();
+      // document.location.reload();
     }
 
     drawCactus(cactus.x, cactus.yOrd, cactus.width, h, cactus.color, cactus.img );
