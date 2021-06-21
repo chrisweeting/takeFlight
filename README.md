@@ -1,4 +1,6 @@
 # Take Flight
+[-Play Take Flight](https://chrisweeting.github.io/takeFlight/)
+
 **Background & Overview**
 -
 Take Flight is a game about a bird's journey through the desert.
