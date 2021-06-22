@@ -13,7 +13,7 @@ Take Flight is a game about a bird's journey through the desert.
 **Functionality**
 ---
 
- - The goal of the game is to avoid cacti which are randomly generated.
+ - The goal of the game is to avoid cacti that are randomly generated.
  - Players use the left and right arrow keys to steer the bird out of harm's way.
  - If the bird collides with a cactus, the game ends. The player can then view their score are presented with the option to press any key to begin again.
  
