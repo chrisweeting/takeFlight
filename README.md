@@ -1,7 +1,7 @@
 
 [![tf logo](https://github.com/chrisweeting/takeFlight/blob/main/src/assets/Take%20Flight-01.png?raw=true)](https://chrisweeting.github.io/takeFlight/)
-<!-- [-Play Take Flight](https://chrisweeting.github.io/takeFlight/) -->
-<a href="https://chrisweeting.github.io/takeFlight/" target="_blank">-Play Take Flight</a>
+[-Play Take Flight](https://chrisweeting.github.io/takeFlight/)
+
 
 **Background**
 -
