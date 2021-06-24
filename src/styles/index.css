@@ -85,12 +85,21 @@ canvas {
   align-items: center;
 }
 
-.right-a a {
+.credits {
   margin-bottom: 10vh;
+}
+
+.credits a {
+  color: transparent;
 }
 
 .github {
   width: 30px;
+}
+
+.linkedin {
+  width: 36px;
+  margin-bottom: -3px;
 }
 
 .begin {
